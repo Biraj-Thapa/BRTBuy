@@ -1,11 +1,16 @@
-import express from "express"
-const app=express();
-const PORT=3000
+import express from "express";
+import connectDb from "./connection/db.js";
 
-app.get("/",(req,res)=>{
-    res.send("hello")
-})
+const app = express();
+import "dotenv/config";
+const PORT = process.env.PORT;
 
-app.listen(PORT,()=>{
-    console.log(`listenting on ${PORT}`)
-})
+connectDb();
+
+app.get("/", (req, res) => {
+  res.send("hello");
+});
+
+app.listen(PORT, () => {
+  console.log(`listenting on ${PORT}`);
+});
