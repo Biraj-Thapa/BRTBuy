@@ -25,3 +25,27 @@ export const getProduct = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const getProductById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    let product = await Product.findById(id);
+    if (!product) return res.json({ message: "Product not found" });
+    res.status(200).send(product);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const updateProductById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    let product = await Product.findByIdAndUpdate(id,req.body,{new:true});
+    if (!product) return res.json({ message: "Product not found" });
+    res.status(200).json({ message: "Product updated Successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
