@@ -4,23 +4,23 @@ const cartItemSchema= new mongoose.Schema({
     productId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Product",
-        require:true
+        required:true
     },
     title:{
         type:String,
-        require:true
+        required:true
     },
     price:{
         type:Number,
-        require:true
+        required:true
     },
     qty:{
         type:Number,
-        require:true
+        required:true
     },
     imgSrc:{
         type:String,
-        require:true
+        required:true
     }
 
 })
@@ -29,7 +29,7 @@ const cartSchema= new mongoose.Schema({
     userId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
-        require:true
+        required:true
     },
     items:[cartItemSchema]
 
