@@ -27,7 +27,39 @@ export const addToCart = async (req, res) => {
       cart,
     });
   } catch (err) {
-    console.log(err)
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+export const userCart = async (req, res) => {
+  try {
+    const userId = "67c3cb3b580b5dba7c948baa";
+
+    let cart = await Cart.findOne({ userId });
+
+    if (!cart) return res.json({ message: "cart not found" });
+
+    res.json({ message: "user cart", cart });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+export const removeProductFromCart = async (req, res) => {
+  const productId = req.params.productId;
+  try {
+    const userId = "67c3cb3b580b5dba7c948baa";
+
+    let cart = await Cart.findOne({ userId });
+
+    if (!cart) return res.json({ message: "cart not found" });
+
+    cart.items=cart.items.filter((item)=>item.productId.toString() !== productId)
+
+    await cart.save()
+
+    res.json({ message: "product remove from cart"});
+  } catch (err) {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
