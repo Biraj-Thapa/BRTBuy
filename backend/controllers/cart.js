@@ -4,7 +4,7 @@ export const addToCart = async (req, res) => {
   try {
     const { productId, title, price, qty, imgSrc } = req.body;
 
-    const userId = "67c3cb3b580b5dba7c948baa";
+    const userId = req.user;
 
     let cart = await Cart.findOne({ userId });
     if (!cart) {
@@ -33,7 +33,7 @@ export const addToCart = async (req, res) => {
 
 export const userCart = async (req, res) => {
   try {
-    const userId = "67c3cb3b580b5dba7c948baa";
+    const userId = req.user ;
 
     let cart = await Cart.findOne({ userId });
 
@@ -68,7 +68,7 @@ export const removeProductFromCart = async (req, res) => {
 
 export const clearCart = async (req, res) => {
   try {
-    const userId = "67c3cb3b580b5dba7c948baa";
+    const userId =req.user;
 
     let cart = await Cart.findOne({ userId });
 
