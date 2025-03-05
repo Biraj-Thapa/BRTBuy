@@ -2,7 +2,8 @@ import express from "express";
 import connectDb from "./connection/db.js";
 import userRouter from "./routes/user.js";
 import productRouter from "./routes/product.js";
-import cartRouter from "./routes/cart.js"
+import cartRouter from "./routes/cart.js";
+import addressRouter from "./models/address.js";
 
 const app = express();
 import "dotenv/config";
@@ -13,10 +14,8 @@ app.use(express.json());
 connectDb();
 app.use("/api/user", userRouter);
 app.use("/api/product", productRouter);
-app.use ("/api/cart", cartRouter)
-
-
-
+app.use("/api/cart", cartRouter);
+app.use("/api/address", addressRouter);
 
 app.get("/", (req, res) => {
   res.send("hello");
