@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from './context/AppContext'
 
 const App = () => {
+  const {data}=useContext(AppContext)
   return (
-    <div>App</div>
+    <div>App {data}</div>
   )
 }
 
