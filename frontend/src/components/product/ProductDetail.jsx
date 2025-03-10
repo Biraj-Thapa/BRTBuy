@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import RelatedProduct from "./RelatedProduct";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState();
@@ -21,6 +22,7 @@ const ProductDetail = () => {
     fetchProducts();
   }, []);
   return (
+
     <div>
       <div className="container text-center my-5" style={{
         display:"flex",
@@ -41,6 +43,7 @@ const ProductDetail = () => {
             </div>
         </div>
       </div>
+      <RelatedProduct category={product?.category}/>
     </div>
   );
 };
