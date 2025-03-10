@@ -16,11 +16,10 @@ const ProductDetail = () => {
         },
         withCredentials: true,
       });
-      console.log(api.data.product);
       setProduct(api.data.product);
     };
     fetchProducts();
-  }, []);
+  }, [id]);
   return (
 
     <div>
