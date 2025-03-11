@@ -1,7 +1,16 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useState } from "react";
+import { Link,useNavigate } from "react-router";
+
 
 const Navbar = () => {
+  const [searchTerm,setSearchTerm]=useState("")
+  const navigate=useNavigate()
+  const submitHandler=(e)=>{
+    e.preventDefault()
+    navigate(`/product/search/${searchTerm}`)
+    setSearchTerm("")
+
+  }
   return (
     <>
       <div className="nav sticky-top">
@@ -13,10 +22,10 @@ const Navbar = () => {
           >
             <h3>BRTBuy</h3>
           </Link>
-          <div className="search_bar">
+          <form className="search_bar" onSubmit={submitHandler}>
             <span className="material-symbols-outlined">search</span>
-            <input type="text"  placeholder="Search Product Here"/>
-          </div>
+            <input value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} type="text"  placeholder="Search Product Here"/>
+          </form>
           <div className="right">
             <div className="btn btn-warning mx-3">cart</div>
             <div className="btn btn-warning mx-3">profile</div>

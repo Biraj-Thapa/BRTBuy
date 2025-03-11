@@ -4,7 +4,7 @@ import ShowProduct from "./components/product/ShowProduct";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import ProductDetail from "./components/product/ProductDetail";
 import Navbar from "./components/Navbar";
-
+import SearchProduct from "./components/product/SearchProduct";
 const App = () => {
   return (
     <>
@@ -13,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<ShowProduct />}/>
           <Route path="/product/:id" element={<ProductDetail/>} />
+          <Route path="/product/search/:term" element={<SearchProduct/>} />
         </Routes>
       </Router>
     </>
