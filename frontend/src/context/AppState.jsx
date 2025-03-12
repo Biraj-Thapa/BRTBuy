@@ -8,6 +8,7 @@ const AppState = (props) => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
   useState;
   useEffect(() => {
     const fetchProducts = async () => {
@@ -19,9 +20,10 @@ const AppState = (props) => {
       });
 
       setProducts(api.data.product);
+      setFilteredData(api.data.product)
     };
     fetchProducts();
-  }, []);
+  }, [token]);
 
   const register = async (name, email, password) => {
     const api = await axios.post(
@@ -76,10 +78,19 @@ const AppState = (props) => {
     return api.data;
   };
   return (
-    <AppContext.Provider value={{ products, register, login, url,
+    <AppContext.Provider
+      value={{
+        products,
+        register,
+        login,
+        url,
         token,
         setIsAuthenticated,
-        isAuthenticated,}}>
+        isAuthenticated,
+        filteredData,
+        setFilteredData,
+      }}
+    >
       {props.children}
     </AppContext.Provider>
   );
