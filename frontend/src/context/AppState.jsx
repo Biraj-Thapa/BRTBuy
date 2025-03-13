@@ -77,6 +77,24 @@ const AppState = (props) => {
     localStorage.setItem("token", api.data.token);
     return api.data;
   };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    setToken(" ");
+    localStorage.removeItem("token");
+    toast.success("Logout Successfully...!", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -89,6 +107,7 @@ const AppState = (props) => {
         isAuthenticated,
         filteredData,
         setFilteredData,
+        logout
       }}
     >
       {props.children}

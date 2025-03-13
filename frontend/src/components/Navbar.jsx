@@ -6,7 +6,7 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { setFilteredData, products } = useContext(AppContext);
+  const { setFilteredData, products,logout } = useContext(AppContext);
 
   const filterbyCategory = (cat) => {
     setFilteredData(
@@ -53,7 +53,10 @@ const Navbar = () => {
             <Link to={"/register"} className="btn btn-info mx-3">
               register
             </Link>
-            <div className="btn btn-warning mx-3">logout</div>
+            <div className="btn btn-danger mx-3" onClick={()=>{
+              logout()
+              navigate("/")
+            }}>logout</div>
           </div>
         </div>
         {location.pathname == "/" && (
