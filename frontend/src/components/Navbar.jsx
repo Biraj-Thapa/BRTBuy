@@ -6,7 +6,8 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { setFilteredData, products,logout } = useContext(AppContext);
+  const { setFilteredData, products, logout, isAuthenticated } =
+    useContext(AppContext);
 
   const filterbyCategory = (cat) => {
     setFilteredData(
@@ -45,18 +46,32 @@ const Navbar = () => {
             />
           </form>
           <div className="right">
-            <div className="btn btn-warning mx-3">cart</div>
-            <div className="btn btn-warning mx-3">profile</div>
-            <Link to={"/login"} className="btn btn-info mx-3">
-              login
-            </Link>
-            <Link to={"/register"} className="btn btn-info mx-3">
-              register
-            </Link>
-            <div className="btn btn-danger mx-3" onClick={()=>{
-              logout()
-              navigate("/")
-            }}>logout</div>
+            {isAuthenticated && (
+              <>
+                <div className="btn btn-warning mx-3">cart</div>
+                <div className="btn btn-warning mx-3">profile</div>
+                <div
+                  className="btn btn-danger mx-3"
+                  onClick={() => {
+                    logout();
+                    navigate("/");
+                  }}
+                >
+                  logout
+                </div>
+              </>
+            )}
+
+            {!isAuthenticated && (
+              <>
+                <Link to={"/login"} className="btn btn-info mx-3">
+                  login
+                </Link>
+                <Link to={"/register"} className="btn btn-info mx-3">
+                  register
+                </Link>
+              </>
+            )}
           </div>
         </div>
         {location.pathname == "/" && (
