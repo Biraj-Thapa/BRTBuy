@@ -49,8 +49,8 @@ const Navbar = () => {
             {isAuthenticated && (
               <>
                 <div className="btn btn-warning mx-3">cart</div>
-                <div className="btn btn-warning mx-3">profile</div>
-                <div
+                <Link to={"/profile"} className="btn btn-primary mx-3">profile</Link>
+                <button
                   className="btn btn-danger mx-3"
                   onClick={() => {
                     logout();
@@ -58,7 +58,7 @@ const Navbar = () => {
                   }}
                 >
                   logout
-                </div>
+                </button>
               </>
             )}
 

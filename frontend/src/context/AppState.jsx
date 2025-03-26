@@ -9,6 +9,7 @@ const AppState = (props) => {
   const [token, setToken] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const [user, setUser] = useState();
   useState;
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,10 +21,20 @@ const AppState = (props) => {
       });
 
       setProducts(api.data.product);
-      setFilteredData(api.data.product)
+      setFilteredData(api.data.product);
+      userProfile();
     };
     fetchProducts();
   }, [token]);
+
+  useEffect(() => {
+    let lstoken = localStorage.getItem("token");
+
+    if (lstoken) {
+      setToken(lstoken);
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   const register = async (name, email, password) => {
     const api = await axios.post(
@@ -95,6 +106,17 @@ const AppState = (props) => {
     });
   };
 
+  const userProfile = async () => {
+    const api = await axios.get(`${url}/user/profile`, {
+      headers: {
+        "Content-Type": "Application/json",
+        Auth: token,
+      },
+      withCredentials: true,
+    });
+    setUser(api.data.user);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -107,7 +129,8 @@ const AppState = (props) => {
         isAuthenticated,
         filteredData,
         setFilteredData,
-        logout
+        logout,
+        user,
       }}
     >
       {props.children}
