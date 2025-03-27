@@ -49,15 +49,17 @@ const Navbar = () => {
           <div className="right">
             {isAuthenticated && (
               <>
+             
                 <Link to={"/cart"}
                   type="button"
                   className="btn btn-primary position-relative mx-3"
                 >
                   <IoCartOutline />
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {cart?.items?.length>0 && <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {cart?.items?.length}
                     <span className="visually-hidden">unread messages</span>
-                  </span>
+                  </span>}
+                  
                 </Link>
                 <Link to={"/profile"} className="btn btn-info mx-3">
                   profile

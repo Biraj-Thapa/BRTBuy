@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const { cart, decreaseQty, addToCart, removeFromCart, clearCart } =
     useContext(AppContext);
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
+  const navigate =useNavigate()
 
   useEffect(() => {
     let qty = 0;
@@ -26,7 +28,9 @@ const Cart = () => {
           <div className="text-center my-5">
             <button
               className="btn btn-warning mx-3"
-              style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+              style={{ fontWeight: "bold", fontSize: "1.2rem" }
+            }
+            onClick={()=>navigate("/shipping")}
             >
               Continue Shopping...
             </button>
