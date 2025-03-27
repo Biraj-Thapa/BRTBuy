@@ -10,6 +10,8 @@ const AppState = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [user, setUser] = useState();
+  const [cart, setCart] = useState([]);
+  const [reload, setReload] = useState(false);
   useState;
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,9 +25,10 @@ const AppState = (props) => {
       setProducts(api.data.product);
       setFilteredData(api.data.product);
       userProfile();
+      userCart();
     };
     fetchProducts();
-  }, [token]);
+  }, [token, reload]);
 
   useEffect(() => {
     let lstoken = localStorage.getItem("token");
@@ -117,6 +120,114 @@ const AppState = (props) => {
     setUser(api.data.user);
   };
 
+  const addToCart = async (productId, title, price, qty, imgSrc) => {
+    console.log("product id = ", productId);
+    const api = await axios.post(
+      `${url}/cart/add`,
+      { productId, title, price, qty, imgSrc },
+      {
+        headers: {
+          "Content-Type": "Application/json",
+          Auth: token,
+        },
+        withCredentials: true,
+      }
+    );
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
+  const userCart = async () => {
+    const api = await axios.get(`${url}/cart/user`, {
+      headers: {
+        "Content-Type": "Application/json",
+        Auth: token,
+      },
+      withCredentials: true,
+    });
+    setCart(api.data.cart);
+  };
+
+  const decreaseQty = async (productId, qty) => {
+    const api = await axios.post(
+      `${url}/cart/--qty`,
+      { productId, qty },
+      {
+        headers: {
+          "Content-Type": "Application/json",
+          Auth: token,
+        },
+        withCredentials: true,
+      }
+    );
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
+  const removeFromCart = async (productId) => {
+    const api = await axios.delete(`${url}/cart/remove/${productId}`, {
+      headers: {
+        "Content-Type": "Application/json",
+        Auth: token,
+      },
+      withCredentials: true,
+    });
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
+  const clearCart = async () => {
+    const api = await axios.delete(`${url}/cart/clear`, {
+      headers: {
+        "Content-Type": "Application/json",
+        Auth: token,
+      },
+      withCredentials: true,
+    });
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -131,6 +242,11 @@ const AppState = (props) => {
         setFilteredData,
         logout,
         user,
+        addToCart,
+        cart,
+        decreaseQty,
+        removeFromCart,
+        clearCart,
       }}
     >
       {props.children}
