@@ -30,7 +30,7 @@ const Cart = () => {
               className="btn btn-warning mx-3"
               style={{ fontWeight: "bold", fontSize: "1.2rem" }
             }
-            onClick={()=>navigate("/shipping")}
+            onClick={()=>navigate("/")}
             >
               Continue Shopping...
             </button>

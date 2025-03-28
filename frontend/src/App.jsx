@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Profile from "./components/user/Profile";
 import Cart from "./components/Cart";
 import Address from  "./components/Address"
+import Checkout from "./components/Checkout"
 const App = () => {
   return (
     <>
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/shipping" element={<Address/>}/>
+          <Route path="/checkout" element={<Checkout/>}/>
         </Routes>
       </Router>
     </>

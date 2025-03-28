@@ -12,6 +12,7 @@ const AppState = (props) => {
   const [user, setUser] = useState();
   const [cart, setCart] = useState([]);
   const [reload, setReload] = useState(false);
+  const [userAddress, setUserAddress] = useState("");
   useState;
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,6 +27,7 @@ const AppState = (props) => {
       setFilteredData(api.data.product);
       userProfile();
       userCart();
+      getAddress()
     };
     fetchProducts();
   }, [token, reload]);
@@ -228,6 +230,53 @@ const AppState = (props) => {
     });
   };
 
+  const shippingAddress = async (
+    fullName,
+    address,
+    city,
+    state,
+    country,
+    pincode,
+    phoneNumber
+  ) => {
+    const api = await axios.post(
+      `${url}/address/add`,
+      { fullName, address, city, state, country, pincode, phoneNumber },
+      {
+        headers: {
+          "Content-Type": "Application/json",
+          Auth: token,
+        },
+        withCredentials: true,
+      }
+    );
+    setReload(!reload);
+    // console.log("remove item from cart ",api);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    return api.data;
+  };
+
+  const getAddress = async () => {
+    const api = await axios.get(`${url}/address/get`, {
+      headers: {
+        "Content-Type": "Application/json",
+        Auth: token,
+      },
+      withCredentials: true,
+    });
+    setUserAddress(api.data.userAddress);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -247,6 +296,8 @@ const AppState = (props) => {
         decreaseQty,
         removeFromCart,
         clearCart,
+        shippingAddress,
+        userAddress,
       }}
     >
       {props.children}
