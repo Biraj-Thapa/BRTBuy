@@ -64,3 +64,8 @@ body::-webkit-scrollbar{
     cursor: pointer;
 
 }
+
+td{
+    vertical-align: middle;
+    cursor: pointer;
+}

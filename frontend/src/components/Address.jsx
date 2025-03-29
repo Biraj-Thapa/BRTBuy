@@ -23,7 +23,6 @@ const Address = () => {
     formData;
   const submitHandler = async (e) => {
     e.preventDefault();
-    // alert("Your form has been submited")
 
     const result = await shippingAddress(
       fullName,
@@ -51,7 +50,6 @@ const Address = () => {
       phoneNumber: "",
     });
 
-    // console.log(formData);
   };
   return (
     <>
