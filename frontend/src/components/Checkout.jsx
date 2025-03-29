@@ -56,7 +56,7 @@ const Checkout = () => {
           </tbody>
         </table>
       </div>
-
+      
       <div className="container text-center my-5">
         <button
           className="btn btn-secondary btn-lg"
