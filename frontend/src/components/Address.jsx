@@ -23,7 +23,6 @@ const Address = () => {
     formData;
   const submitHandler = async (e) => {
     e.preventDefault();
-    // alert("Your form has been submited")
 
     const result = await shippingAddress(
       fullName,
@@ -50,8 +49,6 @@ const Address = () => {
       pincode: "",
       phoneNumber: "",
     });
-
-    // console.log(formData);
   };
   return (
     <>
@@ -89,7 +86,6 @@ const Address = () => {
                 onChange={onChangerHandler}
                 type="text"
                 className="form-control bg-dark text-light"
-                id="exampleInputEmail1"
                 aria-describedby="emailHelp"
               />
             </div>
@@ -103,7 +99,6 @@ const Address = () => {
                 onChange={onChangerHandler}
                 type="text"
                 className="form-control bg-dark text-light"
-                id="exampleInputPassword1"
               />
             </div>
           </div>
@@ -133,7 +128,6 @@ const Address = () => {
                 onChange={onChangerHandler}
                 type="number"
                 className="form-control bg-dark text-light"
-                id="exampleInputEmail1"
                 aria-describedby="emailHelp"
               />
             </div>
@@ -147,7 +141,6 @@ const Address = () => {
                 onChange={onChangerHandler}
                 type="number"
                 className="form-control bg-dark text-light"
-                id="exampleInputPassword1"
               />
             </div>
           </div>
@@ -163,7 +156,6 @@ const Address = () => {
                 onChange={onChangerHandler}
                 type="text"
                 className="form-control bg-dark text-light"
-                id="exampleInputPassword1"
               />
             </div>
           </div>

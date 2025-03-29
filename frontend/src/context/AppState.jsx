@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppContext from "./AppContext";
 import axios from "axios";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 const AppState = (props) => {
   const url = "http://localhost:5000/api";
@@ -27,7 +27,7 @@ const AppState = (props) => {
       setFilteredData(api.data.product);
       userProfile();
       userCart();
-      getAddress()
+      getAddress();
     };
     fetchProducts();
   }, [token, reload]);
@@ -251,7 +251,6 @@ const AppState = (props) => {
       }
     );
     setReload(!reload);
-    // console.log("remove item from cart ",api);
     toast.success(api.data.message, {
       position: "top-right",
       autoClose: 1500,
