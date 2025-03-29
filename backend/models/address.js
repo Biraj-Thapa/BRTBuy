@@ -25,7 +25,7 @@ state:{
     type:String,
     required:true
 },
-pinCode:{
+pincode:{
     type:Number,
     required:true
 },

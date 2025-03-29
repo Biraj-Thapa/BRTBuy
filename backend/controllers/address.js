@@ -7,7 +7,7 @@ export const addAddress = async (req, res) => {
       address,
       city,
       street,
-      pinCode,
+      pincode,
       state,
       country,
       phoneNumber,
@@ -21,7 +21,7 @@ export const addAddress = async (req, res) => {
       address,
       city,
       street,
-      pinCode,
+      pincode,
       state,
       country,
       phoneNumber,
@@ -29,7 +29,7 @@ export const addAddress = async (req, res) => {
 
     res
       .status(201)
-      .json({ message: "Address added successfully", userAddress });
+      .json({ message: "Address added successfully", userAddress,success:true });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
@@ -45,6 +45,6 @@ export const getAddress = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+      .json({ message: "Internal Server Error", error: error.message,success:true });
   }
 };
